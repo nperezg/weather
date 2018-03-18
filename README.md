@@ -1,5 +1,5 @@
 # Weather
-Weather App based on DarkSky API
+Weather App based on DarkSky API. Developed with Symfony.
 
 Requirements
 ------------
