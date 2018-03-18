@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-10">
+            <h1>Next week daily forecast: {{ city }}</h1>
+        </div>
+        <div class="col-2 text-right">
+            <h4><a href="{{ path('weather_index') }}">Return to Home</a></h4>
+        </div>
+    </div>
+    <h4>Latitude: {{ forecast.latitude }}, Longitude: {{ forecast.longitude }}</h4>
+
+    <div>
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th scope="col"><b>Date</b></th>
+                    <th scope="col"><b>Summary</b></th>
+                    <th scope="col"><b>Max Temperature</b></th>
+                    <th scope="col"><b>Min Temperature</b></th>
+                    <th scope="col"><b>Precipitation Probability</b></th>
+                    <th scope="col"><b>Precipitation Intensity</b></th>
+                    <th scope="col"><b>Humidity</b></th>
+                    <th scope="col"><b>Wind Speed</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for weather in forecast.daily.data %}
+                    <tr>
+                        <td>{{ weather.time|date("d/m/Y")}}</td>
+                        <td>{{ weather.summary|default('-') }}</td>
+                        <td>{{ weather.temperatureMax|default('-') }} &#8451;</td>
+                        <td>{{ weather.temperatureMin|default('-') }} &#8451;</td>
+                        <td>{{ weather.precipProbability|default('-') }} %</td>
+                        <td>{{ weather.precipIntensity|default('-') }} %</td>
+                        <td>{{ weather.humidity|default('-') }} %</td>
+                        <td>{{ weather.windSpeed|default('-') }} m/s</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center"><a href="{{ path('weather_index') }}">Return to Home</a></div>
+{% endblock %}

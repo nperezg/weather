@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error is defined %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <div class="text-center" style="margin-top: 200px">
+        <h1>Weather Forecast</h1>
+        <label for="city-search">City Name</label>
+        <input type="text" id="city-search" placeholder="e.g. Barcelona, ES">
+    </div>
+
+    <div class="text-center">
+        <button id="btn-observed" class="btn btn-primary" disabled>Get Past 30-Days</button>
+        <button id="btn-forecast" class="btn btn-info" disabled>Get Next Week Forecast</button>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&libraries=places,geometry"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+
+    <script>
+        var locale;
+        var searchBox = new google.maps.places.SearchBox(document.querySelector("#city-search"));
+
+        searchBox.addListener('places_changed', function() {
+            locale = searchBox.getPlaces()[0];
+            document.getElementById( "btn-observed" ).disabled = false;
+            document.getElementById( "btn-forecast" ).disabled = false;
+        });
+
+        document.getElementById( "btn-observed" ).onclick = function() {
+            redirectToWeatherUrl(locale, 'weather_get_observed');
+        };
+
+        document.getElementById( "btn-forecast" ).onclick = function() {
+            redirectToWeatherUrl(locale, 'weather_get_forecast');
+        };
+
+        function redirectToWeatherUrl(locale, url)
+        {
+            location.href = Routing.generate(url, {
+                'latitude': locale.geometry.location.lat(),
+                'longitude': locale.geometry.location.lng(),
+                'city': document.getElementById( "city-search" ).value
+            })
+        }
+    </script>
+{% endblock %}

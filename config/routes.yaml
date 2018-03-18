@@ -1,0 +1,15 @@
+weather_index:
+    path: /
+    controller: App\Controller\WeatherController::index
+
+weather_get_observed:
+    path: /observed/{latitude}/{longitude}/{city}
+    controller: App\Controller\WeatherController::getObserved
+    options:
+        expose: true
+
+weather_get_forecast:
+    path: /forecast/{latitude}/{longitude}/{city}
+    controller: App\Controller\WeatherController::getForecast
+    options:
+        expose: true
