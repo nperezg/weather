@@ -9,7 +9,18 @@ Requirements
 
 Installation
 ------------
+  
+Create a Google Maps API key:
 
+    https://developers.google.com/maps/documentation/javascript/get-api-key
+    
+Add your Google Maps API and Dark Sky API keys to the file:
+
+    weather/config/services.yaml
+    
+    google_api_key: 'YOUR_GOOGLE_API_KEY'
+    dark_sky_api_key: 'YOUR_DARK_SKY_API_KEY'
+    
 Run:
 
     composer install
