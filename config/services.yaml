@@ -1,8 +1,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    google_api_key: 'GOOGLE_API_KEY'
-    dark_sky_api_key: 'DARK_SKY_API_KEY'
+    google_api_key: 'YOUR_GOOGLE_API_KEY'
+    dark_sky_api_key: 'YOUR_DARK_SKY_API_KEY'
 
 services:
     # default configuration for services in *this* file
